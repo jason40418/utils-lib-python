@@ -1,3 +1,5 @@
+from . import _version
+
 name = "utils-lib"
 
-print (name)
+__VERSION__ = _version.get_version ()

@@ -7,6 +7,7 @@ name = "pypi"
 pytest = "*"
 setuptools = "*"
 twine = "*"
+pytest-cov = "*"
 
 [dev-packages]
 

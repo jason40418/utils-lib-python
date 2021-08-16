@@ -1,0 +1,48 @@
+name: Python Pytest Cov CodeCoverage
+
+on: [push, pull_request]
+
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.7, 3.8, 3.9]
+    env:
+      OS: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Generate coverage report
+      run: |
+        pip install pytest
+        pip install pytest-cov
+    - name: Setup Python path on Mac
+      if: startsWith(matrix.os, 'macOS')
+      run: |
+        PYTHONPATH=$PYTHONPATH:$(pwd)
+        export PYTHONPATH
+        pytest --cov=./ --cov-report=xml
+    - name: Setup Python path on Linux
+      if: startsWith(matrix.os,'ubuntu')
+      run: |
+        PYTHONPATH=$PYTHONPATH:$(pwd)
+        export PYTHONPATH
+        pytest --cov=./ --cov-report=xml
+    - name: Setup Python path on Windows
+      if: startsWith(matrix.os,'windows')
+      run: |
+        $env:PYTHONPATH = $env:PYTHONPATH + ($pwd).path
+        $env:PYTHONPATH
+        pytest --cov=./ --cov-report=xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
+        flags: unittests
+        verbose: true

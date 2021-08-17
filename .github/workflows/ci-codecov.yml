@@ -34,7 +34,7 @@ jobs:
         PYTHONPATH=$PYTHONPATH:$(pwd)
         export PYTHONPATH
         pytest --cov=./ --cov-report=xml
-  
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:

@@ -1,4 +1,3 @@
-
 class ConvertString (object):
     @staticmethod
     def list_to_string(source_list, sep='|'):

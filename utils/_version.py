@@ -1,22 +1,22 @@
 MILESTONE_LIST = {
-    "develope": "dev",
-    "pre-alpha": "pa",
-    "alpha": "a",
-    "beta": "b",
-    "preview": "p",
-    "release-candidate": "rc",
-    "general-availability": "ga",
-    "release": ""
+    'develope': 'dev',
+    'pre-alpha': 'pa',
+    'alpha': 'a',
+    'beta': 'b',
+    'preview': 'p',
+    'release-candidate': 'rc',
+    'general-availability': 'ga',
+    'release': ''
 }
 
-MILESTONE = "develope"
-MAJOR = "0"
-MINOR = "1"
-REVISION = "0"
-YEAR = "2021"
-MONTH = "08"
-DAY = "15"
-BUILD = "00"
+MILESTONE = 'develope'
+MAJOR = '0'
+MINOR = '1'
+REVISION = '0'
+YEAR = '2021'
+MONTH = '08'
+DAY = '15'
+BUILD = '00'
 
 
 #
@@ -30,21 +30,21 @@ BUILD = "00"
 # BB   : Build time
 #
 def get_version():
-    semantic = ".".join([MAJOR, MINOR, REVISION])
+    semantic = '.'.join([MAJOR, MINOR, REVISION])
     milestone = MILESTONE_LIST[MILESTONE]
 
     if MILESTONE == 'develope':
-        build = "".join([YEAR, MONTH, DAY, BUILD])
+        build = ''.join([YEAR, MONTH, DAY, BUILD])
     elif MILESTONE == 'release':
-        build = ""
+        build = ''
     else:
         build = BUILD
 
-    version = "".join([
+    version = ''.join([
         semantic,
-        "_" if MILESTONE != "release" else "",
+        '_' if MILESTONE != 'release' else '',
         milestone,
         build,
-        "" if MILESTONE == "develope" else ""
+        '' if MILESTONE == 'develope' else ''
     ])
     return version

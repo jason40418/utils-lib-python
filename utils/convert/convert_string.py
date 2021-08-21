@@ -10,7 +10,7 @@ class ConvertString (object):
 
         @return      string      : Combine the string to specific character.
         """
-        string = ""
+        string = ''
         if len(source_list) == 0:
             pass
         else:

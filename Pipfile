@@ -10,6 +10,7 @@ twine = "*"
 pytest-cov = "*"
 
 [dev-packages]
+setup-cfg-fmt = "*"
 
 [requires]
 python_version = "3.9"

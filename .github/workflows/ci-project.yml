@@ -1,0 +1,20 @@
+name: 'CI: Check project own script'
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner.
+        with:
+          fetch-depth: 0 # fetch all history so multiple commits can be scanned
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9 #install the python needed
+      - name: Check Encode # run the run.py to get the latest data
+        run: |
+          python ci/CheckEncode/check_encode.py

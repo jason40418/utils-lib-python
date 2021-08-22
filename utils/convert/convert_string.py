@@ -14,7 +14,9 @@ class ConvertString (object):
         if len(source_list) == 0:
             pass
         else:
-            # 使用特殊符號作區隔
+            #
+            # Use special character "sep" to seperate differect string
+            #
             for sub_list in source_list:
                 string = string + sep + str(sub_list)
 

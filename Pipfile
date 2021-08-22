@@ -11,6 +11,7 @@ pytest-cov = "*"
 
 [dev-packages]
 setup-cfg-fmt = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.9"

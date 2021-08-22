@@ -1,4 +1,4 @@
-name: 'CI: Check project own script'
+name: 'CR: Check project own script'
 
 on: [push, pull_request]
 

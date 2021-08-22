@@ -43,6 +43,23 @@ class File(object):
             }
             if not self.__check_content() else {}
         )
+        self.__error_list.append(
+            {
+                'path': self.__path,
+                'error_type': 'HasNonAscII',
+                'error_msg': 'The dirs exist non ASCII character need modify.'
+            }
+            if not self.__check_path_name() else {}
+        )
+
+    def __check_path_name(self):
+        global gCheckEncodeResult
+        result = len(self.__path) == len(self.__path.encode())
+        if not result:
+            gCheckEncodeResult = False
+            print('HasNoAscII: \'{}\' exist not ASCII character '
+                  'need to modify.'.format(self.__path))
+        return result
 
     def __check_content(self):
         global gCheckEncodeResult

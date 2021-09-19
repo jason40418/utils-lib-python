@@ -1,4 +1,3 @@
-
 ANSI_COLOR = {
     'FATAL': '\033[31m',
     'ERROR': '\033[91m',
@@ -9,6 +8,7 @@ ANSI_COLOR = {
     'BOLD': '\033[1m',
     'ENDL': '\033[0m',
 }
+
 
 class _Debug(object):
     @staticmethod

@@ -11,11 +11,11 @@ MILESTONE_LIST = {
 
 MILESTONE = 'develope'
 MAJOR = '0'
-MINOR = '1'
+MINOR = '2'
 REVISION = '0'
-YEAR = '2021'
-MONTH = '09'
-DAY = '19'
+YEAR = '2022'
+MONTH = '02'
+DAY = '13'
 BUILD = '00'
 
 

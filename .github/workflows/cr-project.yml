@@ -7,17 +7,26 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Execute Codecov
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.10']
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner.
+      - name: Checkout the repository and commit
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # fetch all history so multiple commits can be scanned
-      - name: Setup python
-        uses: actions/setup-python@v2
+            submodules: 'recursive'
+            fetch-depth: 0
+
+      - name: Setup Python environment
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10' #install the python needed
+          python-version: ${{ matrix.python-version }}
+
       - name: Check Encode # run the run.py to get the latest data
         run: |
           python ci/CheckEncode/check_encode.py

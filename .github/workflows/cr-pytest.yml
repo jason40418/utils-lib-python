@@ -7,55 +7,56 @@ on:
 
 jobs:
   pytest:
-
-    runs-on : ${{ matrix.os }}
+    name: PyTest
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ['3.5', '3.6', '3.7', '3.8', '3.9', '3.10']
 
+    runs-on : ${{ matrix.os }}
+
     steps:
-    - name: Checkout the commit
-      uses: actions/checkout@v2
-      with:
-          submodules: 'recursive'
-          fetch-depth: 0
+      - name: Checkout the repository and commit
+        uses: actions/checkout@v3
+        with:
+            submodules: 'recursive'
+            fetch-depth: 0
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Setup Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install flake8 pytest
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install flake8 pytest
 
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Test with pytest (macOS)
-      if: startsWith(matrix.os, 'macOS')
-      run: |
-        PYTHONPATH=$PYTHONPATH:$(pwd)
-        export PYTHONPATH
-        pytest
+      - name: Test with pytest (macOS)
+        if: startsWith(matrix.os, 'macOS')
+        run: |
+          PYTHONPATH=$PYTHONPATH:$(pwd)
+          export PYTHONPATH
+          pytest
 
-    - name: Test with pytest (Ubuntu)
-      if: startsWith(matrix.os,'ubuntu')
-      run: |
-        PYTHONPATH=$PYTHONPATH:$(pwd)
-        export PYTHONPATH
-        pytest
+      - name: Test with pytest (Ubuntu)
+        if: startsWith(matrix.os,'ubuntu')
+        run: |
+          PYTHONPATH=$PYTHONPATH:$(pwd)
+          export PYTHONPATH
+          pytest
 
-    - name: Test with pytest (Windows)
-      if: startsWith(matrix.os,'windows')
-      run: |
-        $env:PYTHONPATH = $env:PYTHONPATH + ($pwd).path
-        $env:PYTHONPATH
-        pytest
+      - name: Test with pytest (Windows)
+        if: startsWith(matrix.os,'windows')
+        run: |
+          $env:PYTHONPATH = $env:PYTHONPATH + ($pwd).path
+          $env:PYTHONPATH
+          pytest

@@ -36,7 +36,7 @@ jobs:
 
       - name: Build coverage file
         run: |
-          PYTHONPATH=$PYTHONPATH:$(pwd)
+          PYTHONPATH=$(pwd):$PYTHONPATH
           export PYTHONPATH
           pytest --cache-clear --cov=./ tests/ > pytest-coverage.txt
 

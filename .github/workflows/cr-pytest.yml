@@ -43,20 +43,20 @@ jobs:
       - name: Test with pytest (macOS)
         if: startsWith(matrix.os, 'macOS')
         run: |
-          PYTHONPATH=$PYTHONPATH:$(pwd)
+          PYTHONPATH=$(pwd):$PYTHONPATH
           export PYTHONPATH
           pytest
 
       - name: Test with pytest (Ubuntu)
         if: startsWith(matrix.os,'ubuntu')
         run: |
-          PYTHONPATH=$PYTHONPATH:$(pwd)
+          PYTHONPATH=$(pwd):$PYTHONPATH
           export PYTHONPATH
           pytest
 
       - name: Test with pytest (Windows)
         if: startsWith(matrix.os,'windows')
         run: |
-          $env:PYTHONPATH = $env:PYTHONPATH + ($pwd).path
+          $env:PYTHONPATH = ($pwd).path + $env:PYTHONPATH
           $env:PYTHONPATH
           pytest

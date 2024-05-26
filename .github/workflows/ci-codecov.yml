@@ -35,7 +35,7 @@ jobs:
       - name: Setup Python path on Linux
         if: startsWith(matrix.os,'ubuntu')
         run: |
-          PYTHONPATH=$PYTHONPATH:$(pwd)
+          PYTHONPATH=$(pwd):$PYTHONPATH
           export PYTHONPATH
           pytest --cov=./ --cov-report=xml
 

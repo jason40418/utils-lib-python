@@ -6,5 +6,8 @@ omit =
     */ci/*
     */dist/*
     */tests/*
+
+    #
     # Ignore the logging DebugLib on terminal
-    utils/logging/_debug.py
+    #
+    utils/log/_debug.py
